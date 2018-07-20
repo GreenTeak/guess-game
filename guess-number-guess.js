@@ -1,10 +1,13 @@
 let InvalidInput = require("./invalid-input")
+let generatorRandom = require("./generatorRandom")
 var scanf = require('scanf')
 
 class GuessNumberGame {
 
-    constructor(){
-        this.answer = "1 2 3 4";
+    constructor(random){
+        this.answer = random;
+        //console.log(this.answer," aa" ,this.answer.length);
+        this.invalidInput = new InvalidInput();
     }
     PostionIsTure(Input) {
         let Anumber = 0;
@@ -30,26 +33,18 @@ class GuessNumberGame {
         }
         return numberB;
     }
-    invalidisTrue(){
-        let inputs = scanf("%s");
-        //let inputs = "1 5 6 7";
-        let invalidInput = new InvalidInput(inputs);
-        while(!invalidInput){
-            //inputs = "1 5 6 7";
-           inputs = scanf("%s");
-           invalidInput = new InvalidInput(inputs);
-        }
-        return inputs;
-    }
     test(input) {
         const numberA = this.PostionIsTure(input);
         return `${numberA}A${this.numberIsTure(input) - numberA}B`;
     }
-    /*App(){
+    App(){
         let count = 6;
         let output = "";
+        let inputs = scanf("%s");
         while (count--){
-            let inputs = this.invalidisTrue();
+            while (!this.invalidInput.invalididtnify(inputs)){
+                inputs = scanf("%s");
+            }
             if(inputs == this.answer){
                 output = "Win";
                 break;
@@ -57,6 +52,6 @@ class GuessNumberGame {
             output = test(inputs);
         }
         output = "game over";
-    }*/
+    }
 }
 module.exports = GuessNumberGame;

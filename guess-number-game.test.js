@@ -1,22 +1,30 @@
 let GuessNumberGame = require("./guess-number-guess")
 let InvalidInput = require("./invalid-input")
+let GeneratorRandom = require("./generatorRandom")
 
 describe("GuessNumberGame",function () {
+    let guess;
+    beforeEach(()=>{
+        let generatorRandom =new GeneratorRandom();
+        let spy = jest.spyOn(GeneratorRandom.prototype, "generator").mockReturnValue("1 2 3 4");
+        guess = new GuessNumberGame(generatorRandom.generator());
+
+    });
     it('should  return 4A0B for input 1 2 3 4 when answer is 1 2 3 4',function () {
-        expect(new GuessNumberGame().test("1 2 3 4")).toEqual("4A0B")
+        expect(guess.test("1 2 3 4")).toEqual("4A0B")
 
     });
     it('should return 3A0B for input 1 2 3 5 when answer is 1 2 3 4',function () {
-        expect(new GuessNumberGame().test("1 2 3 5")).toEqual("3A0B");
-    })
+        expect(guess.test("1 2 3 5")).toEqual("3A0B");
+    });
     it('should return 0A4B for input 4 3 2 1 when answer is 1 2 3 4',function () {
-        expect(new GuessNumberGame().test("4 3 2 1")).toEqual("0A4B");
+        expect(guess.test("4 3 2 1")).toEqual("0A4B");
 
-    })
+    });
     it('should return 2A2B for input 1 2 4 3 when answer is 1 2 3 4',function () {
-        expect(new GuessNumberGame().test("1 2 4 3")).toEqual("2A2B");
+        expect(guess.test("1 2 4 3")).toEqual("2A2B");
 
-    })
+    });
     /*it("should print Wrong Input，Input again when input is 1 2 3 4",function () {
         let guessnumber = new  GuessNumberGame();
         guessnumber.test("1 2 a b");
