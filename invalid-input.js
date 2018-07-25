@@ -1,29 +1,16 @@
 class InvalidInput {
     invalididtnify(input) {
         let invalid = "Wrong Input，Input again";
-        let inputs = input.split(" ");
-        if (inputs.length != 4) {
-            console.log(invalid);
-            return false;
-        }
-        for (let i = 0; i < inputs.length;)
-            for (let indexi = 0; indexi < 4; indexi++) {
-                for (let indexj = 0; indexj < 4; indexj++) {
-                    if (indexi != indexj && input[indexi] === input[indexj]) {
-                        console.log(invalid);
-                        return false;
-                    }
-                }
-            }
-        for (let index = 0; index < input.length; index++) {
-            if (+input.charCodeAt(index) >= 0 && +input.charCodeAt(index) <= 9) {
-                continue;
-            }else{
-                console.log(invalid);
-                return false;
-            } ;
-        }
+        const inputs = input.split(' ');
+        const charCodes = inputs.filter(a => a.charCodeAt(0) > 57 || a.charCodeAt(0) < 48)
+        return inputs.length === 4 && charCodes.length === 0;
     }
 }
 
-module.exports = InvalidInput;
+if (typeof module !== "undefined") {
+    module.exports = InvalidInput;
+}
+
+if (typeof window !== "undefined") {
+    window.InvalidInput = InvalidInput
+}

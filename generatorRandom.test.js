@@ -1,4 +1,4 @@
-let generatorRandom = require("./generatorRandom")
+let generatorRandom = require("./generateRandom")
 describe("generatorRandom",function () {
     it('should return random ',function () {
         let random = new generatorRandom();

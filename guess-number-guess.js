@@ -1,13 +1,12 @@
 let InvalidInput = require("./invalid-input")
-let generatorRandom = require("./generatorRandom")
-var scanf = require('scanf')
+// var scanf = require('scanf')
 
 class GuessNumberGame {
 
     constructor(random){
-        this.answer = random;
-        //console.log(this.answer," aa" ,this.answer.length);
+        this.answer = random.generator();
         this.invalidInput = new InvalidInput();
+        this.count = 6;
     }
     PostionIsTure(Input) {
         let Anumber = 0;
@@ -34,24 +33,26 @@ class GuessNumberGame {
         return numberB;
     }
     test(input) {
-        const numberA = this.PostionIsTure(input);
-        return `${numberA}A${this.numberIsTure(input) - numberA}B`;
-    }
-    App(){
         let count = 6;
         let output = "";
-        let inputs = scanf("%s");
-        while (count--){
-            while (!this.invalidInput.invalididtnify(inputs)){
-                inputs = scanf("%s");
-            }
-            if(inputs == this.answer){
-                output = "Win";
-                break;
-            }
-            output = test(inputs);
+        let inputs = input;
+        if(!this.invalidInput.invalididtnify(input))
+            return "Wrong Input，Input again";
+        if(inputs == this.answer){
+            output = "Win";
         }
-        output = "game over";
+        output = `${this.PostionIsTure(input)}A${this.numberIsTure(input) - this.PostionIsTure(input)}B`;
+        if(this.count === 1){
+            output = "game over";
+        }
+        this.count--;
+        return output;
     }
 }
-module.exports = GuessNumberGame;
+if (typeof module !== "undefined") {
+    module.exports = GuessNumberGame;
+}
+
+if (typeof window !== "undefined") {
+    window.GuessNumberGame = GuessNumberGame
+}
