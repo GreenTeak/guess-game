@@ -36,15 +36,10 @@ class GuessNumberGame {
         let count = 6;
         let output = "";
         let inputs = input;
+        console.log(this.answer)
         if(!this.invalidInput.invalididtnify(input))
             return "Wrong Input，Input again";
-        if(inputs == this.answer){
-            output = "Win";
-        }
         output = `${this.PostionIsTure(input)}A${this.numberIsTure(input) - this.PostionIsTure(input)}B`;
-        if(this.count === 1){
-            output = "game over";
-        }
         this.count--;
         return output;
     }
